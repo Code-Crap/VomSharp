@@ -24,8 +24,8 @@ namespace VomSharp
         //Complex = Complex128,
         TypeObject = 14,
         Any = 15,
-        ByteArray = 39,
-        StringArray = 40
+        ByteList = 39,
+        StringList = 40
     }
 
 

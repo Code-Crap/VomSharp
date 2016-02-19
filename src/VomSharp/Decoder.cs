@@ -279,6 +279,13 @@ namespace VomSharp
             }
         }
 
+        private object ReadPrimitive(long typeId)
+        {
+            object value = ReadPrimitiveValue(typeId);
+
+            return mStrategy.ActivatePrimitive(value);
+        }
+
         private static bool IsPrimitiveValue(long typeId)
         {
             PrimitiveType casted = (PrimitiveType) typeId;
@@ -286,7 +293,7 @@ namespace VomSharp
                    (casted <= PrimitiveType.Complex128);
         }
 
-        private object ReadPrimitive(long typeId)
+        private object ReadPrimitiveValue(long typeId)
         {
             PrimitiveType type = (PrimitiveType) typeId;
 

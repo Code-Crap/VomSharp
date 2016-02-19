@@ -2,6 +2,7 @@ namespace VomSharp
 {
     interface IReflectionStrategy
     {
+        object ActivatePrimitive(object value);
         object ActivateCollection(ISequenceWireType type, IWireType sequenceType, long length);
         void SetCollectionValue(object instance, int index, object value);
         object ActivateMap(WireMap type, IWireType keyType, IWireType elementType, long length);

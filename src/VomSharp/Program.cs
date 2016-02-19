@@ -26,11 +26,6 @@ namespace VomSharp
          
     }
 
-    class TypeDecoder
-    {
-         
-    }
-
     class TypeEncoder
     {
          

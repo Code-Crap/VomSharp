@@ -2,7 +2,7 @@ using VomSharp.WireTypes;
 
 namespace VomSharp
 {
-    [VdlUnionMapping(0,typeof(WireNamed))]
+    [VdlUnionMapping(0, typeof(WireNamed))]
     [VdlUnionMapping(1, typeof(WireEnum))]
     [VdlUnionMapping(2, typeof(WireArray))]
     [VdlUnionMapping(3, typeof(WireList))]

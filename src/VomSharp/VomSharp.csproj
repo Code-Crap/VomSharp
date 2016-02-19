@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Decoder.cs" />
+    <Compile Include="TypeDecoder.cs" />
     <Compile Include="WireTypes\Contracts\WireNamed.cs" />
     <Compile Include="IMainValue.cs" />
     <Compile Include="IPrimitiveEncoder.cs" />

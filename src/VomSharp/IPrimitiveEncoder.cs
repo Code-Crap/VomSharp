@@ -31,6 +31,8 @@ namespace VomSharp
 
     public interface IPrimitiveDecoder
     {
+        byte PeekHeader();
+
         bool ReadBoolean();
         byte ReadByte();
         string ReadString();

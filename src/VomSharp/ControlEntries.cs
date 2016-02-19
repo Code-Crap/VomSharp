@@ -2,7 +2,7 @@ namespace VomSharp
 {
     public static class ControlEntries
     {
-        public const ulong END = 0xE1;
-        public const ulong NIL = 0xE0;
+        public const byte END = 0xE1;
+        public const byte NIL = 0xE0;
     }
 }

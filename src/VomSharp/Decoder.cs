@@ -28,8 +28,14 @@ namespace VomSharp
                                       {
                                           Base =
                                               (ulong) type,
-                                          Name = type.ToString()
+                                          Name = type.ToString().ToLower()
                                       });
+
+            mPredefinedTypeIdToWireType[(long)PrimitiveType.ByteList] =
+                new WireList() {Name = "[]byte", Elem = (ulong)PrimitiveType.Byte};
+
+            mPredefinedTypeIdToWireType[(long) PrimitiveType.StringList] =
+                new WireList() {Name = "[]string", Elem = (ulong) PrimitiveType.String};
         }
 
         public Decoder(Stream stream)
@@ -125,7 +131,44 @@ namespace VomSharp
             return ReadUnion(wireType);
         }
 
+        private object ReadComposite(WireOptional wireType)
+        {
+            return ReadOptional(wireType);
+        }
+
+        private object ReadComposite(WireNamed wireType)
+        {
+            return ReadAny(wireType);
+        }
+
         #endregion
+
+        private object ReadAny(WireNamed wireType)
+        {
+            if ((PrimitiveType) wireType.Base != PrimitiveType.Any)
+            {
+                throw new Exception("");
+            }
+
+            if (mDecoder.PeekHeader() == ControlEntries.NIL)
+            {
+                return mStrategy.ActivateNil();
+            }
+
+            ulong typeId = mDecoder.ReadUInt64();
+
+            return ReadValue((long) typeId, false);
+        }
+
+        private object ReadOptional(WireOptional wireType)
+        {
+            if (mDecoder.PeekHeader() == ControlEntries.NIL)
+            {
+                return mStrategy.ActivateNil();
+            }
+
+            return ReadValue((long) wireType.Elem, false);
+        }
 
         private object ReadUnion(WireUnion wireType)
         {
@@ -153,10 +196,12 @@ namespace VomSharp
         {
             object instance = mStrategy.ActivateStruct(wireType);
 
-            ulong index = mDecoder.ReadUInt64();
+            byte control = mDecoder.PeekHeader();
 
-            while (index != ControlEntries.END)
+            while (control != ControlEntries.END)
             {
+                ulong index = mDecoder.ReadUInt64();
+
                 if ((long) index >= wireType.Fields.Length)
                 {
                     throw new Exception("");
@@ -170,7 +215,7 @@ namespace VomSharp
 
                 mStrategy.SetStructFieldValue(instance, field, fieldValue);
 
-                index = mDecoder.ReadUInt64();
+                control = mDecoder.PeekHeader();
             }
 
             return instance;
@@ -238,7 +283,9 @@ namespace VomSharp
 
         private static bool IsPrimitiveValue(long typeId)
         {
-            return Enum.IsDefined(typeof (PrimitiveType), typeId);
+            PrimitiveType casted = (PrimitiveType) typeId;
+            return (casted >= PrimitiveType.Bool) &&
+                   (casted <= PrimitiveType.Complex128);
         }
 
         private object ReadPrimitive(long typeId)
@@ -271,10 +318,6 @@ namespace VomSharp
                     return mDecoder.ReadComplex64();
                 case PrimitiveType.Complex128:
                     return mDecoder.ReadComplex128();
-                case PrimitiveType.ByteArray:
-                    return mDecoder.ReadComplex128();
-                case PrimitiveType.StringArray:
-                    return mDecoder.ReadComplex64();
             }
 
             return null;

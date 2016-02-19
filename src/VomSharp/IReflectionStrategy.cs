@@ -8,8 +8,7 @@ namespace VomSharp
         void SetMapValue(object instance, object key, object value);
         object ActivateStruct(WireStruct type);
         void SetStructFieldValue(object instance, WireField field, object fieldValue);
-        object ActivateUnion(WireUnion wireType);
-        void SetUnionFieldValue(object instance, WireField field, object fieldValue);
+        object ActivateUnion(WireUnion wireType, WireField field, object fieldValue);
         object ActivateNil();
     }
 }

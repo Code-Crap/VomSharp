@@ -172,8 +172,6 @@ namespace VomSharp
 
         private object ReadUnion(WireUnion wireType)
         {
-            object instance = mStrategy.ActivateUnion(wireType);
-
             ulong index = mDecoder.ReadUInt64();
 
             if ((long) index >= wireType.Fields.Length)
@@ -187,9 +185,9 @@ namespace VomSharp
 
             object fieldValue = ReadValue((long) fieldType, false);
 
-            mStrategy.SetUnionFieldValue(instance, field, fieldValue);
+            object result = mStrategy.ActivateUnion(wireType, field, fieldValue);
 
-            return instance;
+            return result;
         }
 
         private object ReadStruct(WireStruct wireType)

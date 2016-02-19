@@ -4,6 +4,8 @@ namespace VomSharp
 {
     public class TypeDecoder
     {
+        private const ulong END = 0xE1;
+
         private readonly IPrimitiveDecoder mDecoder;
 
         public TypeDecoder(IPrimitiveDecoder decoder)
@@ -44,8 +46,24 @@ namespace VomSharp
         {
             WireNamed result = new WireNamed();
 
-            result.Name = mDecoder.ReadString();
-            result.Base = mDecoder.ReadUInt32();
+            ulong index = mDecoder.ReadUInt64();
+
+            while (index != END)
+            {
+                switch (index)
+                {
+                    case 0:
+                        result.Name = mDecoder.ReadString();
+                        break;
+                    case 1:
+                        result.Base = mDecoder.ReadUInt32();
+                        break;
+                    default:
+                        throw new IndexOutOfRangeException();
+                }
+
+                index = mDecoder.ReadUInt64();
+            }
 
             return result;
         }
@@ -54,8 +72,24 @@ namespace VomSharp
         {
             WireEnum result = new WireEnum();
 
-            result.Name = mDecoder.ReadString();
-            result.Labels = mDecoder.ReadStrings();
+            ulong index = mDecoder.ReadUInt64();
+
+            while (index != END)
+            {
+                switch (index)
+                {
+                    case 0:
+                        result.Name = mDecoder.ReadString();
+                        break;
+                    case 1:
+                        result.Labels = mDecoder.ReadStrings();
+                        break;
+                    default:
+                        throw new IndexOutOfRangeException();
+                }
+
+                index = mDecoder.ReadUInt64();
+            }
 
             return result;
         }
@@ -64,9 +98,27 @@ namespace VomSharp
         {
             WireArray result = new WireArray();
 
-            result.Name = mDecoder.ReadString();
-            result.Elem = mDecoder.ReadUInt64();
-            result.Len = mDecoder.ReadUInt64();
+            ulong index = mDecoder.ReadUInt64();
+
+            while (index != END)
+            {
+                switch (index)
+                {
+                    case 0:
+                        result.Name = mDecoder.ReadString();
+                        break;
+                    case 1:
+                        result.Elem = mDecoder.ReadUInt64();
+                        break;
+                    case 2:
+                        result.Len = mDecoder.ReadUInt64();
+                        break;
+                    default:
+                        throw new IndexOutOfRangeException();
+                }
+
+                index = mDecoder.ReadUInt64();
+            }
 
             return result;
         }
@@ -75,8 +127,24 @@ namespace VomSharp
         {
             WireList result = new WireList();
 
-            result.Name = mDecoder.ReadString();
-            result.Elem = mDecoder.ReadUInt64();
+            ulong index = mDecoder.ReadUInt64();
+
+            while (index != END)
+            {
+                switch (index)
+                {
+                    case 0:
+                        result.Name = mDecoder.ReadString();
+                        break;
+                    case 1:
+                        result.Elem = mDecoder.ReadUInt64();
+                        break;
+                    default:
+                        throw new IndexOutOfRangeException();
+                }
+
+                index = mDecoder.ReadUInt64();
+            }
 
             return result;
         }
@@ -85,8 +153,24 @@ namespace VomSharp
         {
             WireSet result = new WireSet();
 
-            result.Name = mDecoder.ReadString();
-            result.Key = mDecoder.ReadUInt64();
+            ulong index = mDecoder.ReadUInt64();
+
+            while (index != END)
+            {
+                switch (index)
+                {
+                    case 0:
+                        result.Name = mDecoder.ReadString();
+                        break;
+                    case 1:
+                        result.Key = mDecoder.ReadUInt64();
+                        break;
+                    default:
+                        throw new IndexOutOfRangeException();
+                }
+
+                index = mDecoder.ReadUInt64();
+            }
 
             return result;
         }
@@ -95,9 +179,27 @@ namespace VomSharp
         {
             WireMap result = new WireMap();
 
-            result.Name = mDecoder.ReadString();
-            result.Key = mDecoder.ReadUInt64();
-            result.Elem = mDecoder.ReadUInt64();
+            ulong index = mDecoder.ReadUInt64();
+
+            while (index != END)
+            {
+                switch (index)
+                {
+                    case 0:
+                        result.Name = mDecoder.ReadString();
+                        break;
+                    case 1:
+                        result.Key = mDecoder.ReadUInt64();
+                        break;
+                    case 2:
+                        result.Elem = mDecoder.ReadUInt64();
+                        break;
+                    default:
+                        throw new IndexOutOfRangeException();
+                }
+
+                index = mDecoder.ReadUInt64();
+            }
 
             return result;
         }
@@ -106,8 +208,24 @@ namespace VomSharp
         {
             WireStruct result = new WireStruct();
 
-            result.Name = mDecoder.ReadString();
-            result.Fields = ReadFieldArray();
+            ulong index = mDecoder.ReadUInt64();
+
+            while (index != END)
+            {
+                switch (index)
+                {
+                    case 0:
+                        result.Name = mDecoder.ReadString();
+                        break;
+                    case 1:
+                        result.Fields = ReadFieldArray();
+                        break;
+                    default:
+                        throw new IndexOutOfRangeException();
+                }
+
+                index = mDecoder.ReadUInt64();
+            }
 
             return result;
         }
@@ -116,8 +234,24 @@ namespace VomSharp
         {
             WireUnion result = new WireUnion();
 
-            result.Name = mDecoder.ReadString();
-            result.Fields = ReadFieldArray();
+            ulong index = mDecoder.ReadUInt64();
+
+            while (index != END)
+            {
+                switch (index)
+                {
+                    case 0:
+                        result.Name = mDecoder.ReadString();
+                        break;
+                    case 1:
+                        result.Fields = ReadFieldArray();
+                        break;
+                    default:
+                        throw new IndexOutOfRangeException();
+                }
+
+                index = mDecoder.ReadUInt64();
+            }
 
             return result;
         }
@@ -126,24 +260,64 @@ namespace VomSharp
         {
             WireOptional result = new WireOptional();
 
-            result.Name = mDecoder.ReadString();
-            result.Elem = mDecoder.ReadUInt64();
+            ulong index = mDecoder.ReadUInt64();
+
+            while (index != END)
+            {
+                switch (index)
+                {
+                    case 0:
+                        result.Name = mDecoder.ReadString();
+                        break;
+                    case 1:
+                        result.Elem = mDecoder.ReadUInt64();
+                        break;
+                    default:
+                        throw new IndexOutOfRangeException();
+                }
+
+                index = mDecoder.ReadUInt64();
+            }
 
             return result;
         }
 
         private WireField[] ReadFieldArray()
         {
+            long arrayLength = mDecoder.ReadInt64();
 
-            return new WireField[] {};
+            WireField[] result = new WireField[arrayLength];
+
+            for (int i = 0; i < arrayLength; i++)
+            {
+                result[i] = ReadWireField();
+            }
+
+            return result;
         }
 
         private WireField ReadWireField()
         {
             WireField result = new WireField();
 
-            result.Name = mDecoder.ReadString();
-            result.Type = mDecoder.ReadUInt64();
+            ulong index = mDecoder.ReadUInt64();
+
+            while (index != END)
+            {
+                switch (index)
+                {
+                    case 0:
+                        result.Name = mDecoder.ReadString();
+                        break;
+                    case 1:
+                        result.Type = mDecoder.ReadUInt64();
+                        break;
+                    default:
+                        throw new IndexOutOfRangeException();
+                }
+
+                index = mDecoder.ReadUInt64();
+            }
 
             return result;
         }

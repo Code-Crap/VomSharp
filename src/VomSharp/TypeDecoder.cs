@@ -46,10 +46,12 @@ namespace VomSharp
         {
             WireNamed result = new WireNamed();
 
-            ulong index = mDecoder.ReadUInt64();
+            byte header = mDecoder.PeekHeader();
 
-            while (index != END)
+            while (header != END)
             {
+                ulong index = mDecoder.ReadUInt64();
+
                 switch (index)
                 {
                     case 0:
@@ -62,7 +64,7 @@ namespace VomSharp
                         throw new IndexOutOfRangeException();
                 }
 
-                index = mDecoder.ReadUInt64();
+                header = mDecoder.PeekHeader();
             }
 
             return result;
@@ -72,10 +74,12 @@ namespace VomSharp
         {
             WireEnum result = new WireEnum();
 
-            ulong index = mDecoder.ReadUInt64();
+            byte header = mDecoder.PeekHeader();
 
-            while (index != END)
+            while (header != END)
             {
+                ulong index = mDecoder.ReadUInt64();
+
                 switch (index)
                 {
                     case 0:
@@ -88,7 +92,7 @@ namespace VomSharp
                         throw new IndexOutOfRangeException();
                 }
 
-                index = mDecoder.ReadUInt64();
+                header = mDecoder.PeekHeader();
             }
 
             return result;
@@ -98,10 +102,12 @@ namespace VomSharp
         {
             WireArray result = new WireArray();
 
-            ulong index = mDecoder.ReadUInt64();
+            byte header = mDecoder.PeekHeader();
 
-            while (index != END)
+            while (header != END)
             {
+                ulong index = mDecoder.ReadUInt64();
+
                 switch (index)
                 {
                     case 0:
@@ -117,7 +123,7 @@ namespace VomSharp
                         throw new IndexOutOfRangeException();
                 }
 
-                index = mDecoder.ReadUInt64();
+                header = mDecoder.PeekHeader();
             }
 
             return result;
@@ -127,10 +133,12 @@ namespace VomSharp
         {
             WireList result = new WireList();
 
-            ulong index = mDecoder.ReadUInt64();
+            byte header = mDecoder.PeekHeader();
 
-            while (index != END)
+            while (header != END)
             {
+                ulong index = mDecoder.ReadUInt64();
+
                 switch (index)
                 {
                     case 0:
@@ -143,7 +151,7 @@ namespace VomSharp
                         throw new IndexOutOfRangeException();
                 }
 
-                index = mDecoder.ReadUInt64();
+                header = mDecoder.PeekHeader();
             }
 
             return result;
@@ -153,10 +161,12 @@ namespace VomSharp
         {
             WireSet result = new WireSet();
 
-            ulong index = mDecoder.ReadUInt64();
+            byte header = mDecoder.PeekHeader();
 
-            while (index != END)
+            while (header != END)
             {
+                ulong index = mDecoder.ReadUInt64();
+
                 switch (index)
                 {
                     case 0:
@@ -169,7 +179,7 @@ namespace VomSharp
                         throw new IndexOutOfRangeException();
                 }
 
-                index = mDecoder.ReadUInt64();
+                header = mDecoder.PeekHeader();
             }
 
             return result;
@@ -179,10 +189,12 @@ namespace VomSharp
         {
             WireMap result = new WireMap();
 
-            ulong index = mDecoder.ReadUInt64();
+            byte header = mDecoder.PeekHeader();
 
-            while (index != END)
+            while (header != END)
             {
+                ulong index = mDecoder.ReadUInt64();
+
                 switch (index)
                 {
                     case 0:
@@ -198,7 +210,7 @@ namespace VomSharp
                         throw new IndexOutOfRangeException();
                 }
 
-                index = mDecoder.ReadUInt64();
+                header = mDecoder.PeekHeader();
             }
 
             return result;
@@ -208,10 +220,12 @@ namespace VomSharp
         {
             WireStruct result = new WireStruct();
 
-            ulong index = mDecoder.ReadUInt64();
+            byte header = mDecoder.PeekHeader();
 
-            while (index != END)
+            while (header != END)
             {
+                ulong index = mDecoder.ReadUInt64();
+
                 switch (index)
                 {
                     case 0:
@@ -224,7 +238,7 @@ namespace VomSharp
                         throw new IndexOutOfRangeException();
                 }
 
-                index = mDecoder.ReadUInt64();
+                header = mDecoder.PeekHeader();
             }
 
             return result;
@@ -234,10 +248,12 @@ namespace VomSharp
         {
             WireUnion result = new WireUnion();
 
-            ulong index = mDecoder.ReadUInt64();
+            byte header = mDecoder.PeekHeader();
 
-            while (index != END)
+            while (header != END)
             {
+                ulong index = mDecoder.ReadUInt64();
+
                 switch (index)
                 {
                     case 0:
@@ -250,7 +266,7 @@ namespace VomSharp
                         throw new IndexOutOfRangeException();
                 }
 
-                index = mDecoder.ReadUInt64();
+                header = mDecoder.PeekHeader();
             }
 
             return result;
@@ -260,10 +276,12 @@ namespace VomSharp
         {
             WireOptional result = new WireOptional();
 
-            ulong index = mDecoder.ReadUInt64();
+            byte header = mDecoder.PeekHeader();
 
-            while (index != END)
+            while (header != END)
             {
+                ulong index = mDecoder.ReadUInt64();
+
                 switch (index)
                 {
                     case 0:
@@ -276,7 +294,7 @@ namespace VomSharp
                         throw new IndexOutOfRangeException();
                 }
 
-                index = mDecoder.ReadUInt64();
+                header = mDecoder.PeekHeader();
             }
 
             return result;
@@ -300,10 +318,12 @@ namespace VomSharp
         {
             WireField result = new WireField();
 
-            ulong index = mDecoder.ReadUInt64();
+            byte header = mDecoder.PeekHeader();
 
-            while (index != END)
+            while (header != END)
             {
+                ulong index = mDecoder.ReadUInt64();
+
                 switch (index)
                 {
                     case 0:
@@ -316,7 +336,7 @@ namespace VomSharp
                         throw new IndexOutOfRangeException();
                 }
 
-                index = mDecoder.ReadUInt64();
+                header = mDecoder.PeekHeader();
             }
 
             return result;

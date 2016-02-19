@@ -3,10 +3,10 @@ using System.Numerics;
 
 namespace VomSharp
 {
-    public enum BuiltInTypes
+    public enum PrimitiveType : long
     {
         Bool = 1,
-        Boolean = Bool,
+        //Boolean = Bool,
         Byte = 2,
         String = 3,
         UInt16 = 4,
@@ -16,12 +16,12 @@ namespace VomSharp
         Int32 = 8,
         Int64 = 9,
         Float32 = 10,
-        Single = Float32,
+        //Single = Float32,
         Float64 = 11,
-        Double = Float64,
+        //Double = Float64,
         Complex64 = 12,
         Complex128 = 13,
-        Complex = Complex128,
+        //Complex = Complex128,
         TypeObject = 14,
         Any = 15,
         ByteArray = 39,

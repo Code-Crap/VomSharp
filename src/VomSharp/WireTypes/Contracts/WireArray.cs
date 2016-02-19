@@ -3,7 +3,7 @@ using VomSharp.WireTypes;
 
 namespace VomSharp
 {
-    public class WireArray : IWireType
+    public class WireArray : ISequenceWireType
     {
         [VdlField(0)]
         public string Name { get; set; }
@@ -11,5 +11,13 @@ namespace VomSharp
         public TypeId Elem { get; set; }
         [VdlField(2)]
         public ulong Len { get; set; }
+
+        public ulong SequenceType
+        {
+            get
+            {
+                return Elem;
+            }
+        }
     }
 }

@@ -4,7 +4,7 @@ namespace VomSharp
 {
     public class TypeDecoder
     {
-        private const ulong END = 0xE1;
+        private const ulong END = ControlEntries.END;
 
         private readonly IPrimitiveDecoder mDecoder;
 

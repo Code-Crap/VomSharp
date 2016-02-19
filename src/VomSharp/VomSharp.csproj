@@ -43,8 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ControlEntries.cs" />
     <Compile Include="Decoder.cs" />
+    <Compile Include="IReflectionStrategy.cs" />
     <Compile Include="TypeDecoder.cs" />
+    <Compile Include="WireTypes\Contracts\ISequenceWireType.cs" />
     <Compile Include="WireTypes\Contracts\WireNamed.cs" />
     <Compile Include="IMainValue.cs" />
     <Compile Include="IPrimitiveEncoder.cs" />
